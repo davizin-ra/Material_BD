@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/06/2024 às 17:43
+-- Tempo de geração: 14/06/2024 às 17:45
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `produtoravinho`
 --
-CREATE DATABASE IF NOT EXISTS `produtoravinho` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `produtoravinho`;
 
 -- --------------------------------------------------------
 
@@ -33,6 +31,18 @@ CREATE TABLE `casta` (
   `codCasta` int(11) NOT NULL,
   `casta` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `casta`
+--
+
+INSERT INTO `casta` (`codCasta`, `casta`) VALUES
+(1, 'Touriga Nacional'),
+(2, 'Tinta Roriz'),
+(3, 'Tinta Barroca'),
+(4, 'Tatu Tati'),
+(5, 'Papu Popi'),
+(6, 'Galo Cego');
 
 -- --------------------------------------------------------
 
@@ -60,6 +70,20 @@ CREATE TABLE `produtor` (
   `codregiao` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `produtor`
+--
+
+INSERT INTO `produtor` (`produtorid`, `nomeProdutor`, `moradaProdutor`, `telefone`, `email`, `codregiao`) VALUES
+(1, 'Qt. Vallado', 'Régua', '254323147', 'vallado@mail.telepac.pt', 1),
+(2, 'Finagra', 'Reguengos', '266509270', 'esporao@esporao.com', 2),
+(3, 'Dão Sul', NULL, NULL, NULL, 3),
+(4, 'Kolheita Ideias', NULL, NULL, NULL, 4),
+(5, 'Catatau', 'Maranhão', '40028922', 'catatau@mail.telepac.pt', 5),
+(6, 'Firuruca', 'Ipanema', '964193474', 'firuruca@esporao.com', 6),
+(7, 'Seijo ferro', NULL, NULL, NULL, 1),
+(8, 'Savero', NULL, NULL, NULL, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -81,7 +105,7 @@ INSERT INTO `regiao` (`idregiao`, `descriregiao`) VALUES
 (3, 'Douro'),
 (4, 'ETECMCM'),
 (5, 'Fazenda da ETEC'),
-(7, 'Fazenda Sul Cintia');
+(6, 'Fazenda Sul Cintia');
 
 -- --------------------------------------------------------
 
@@ -145,13 +169,13 @@ ALTER TABLE `vinho`
 -- AUTO_INCREMENT de tabela `casta`
 --
 ALTER TABLE `casta`
-  MODIFY `codCasta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codCasta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `produtor`
 --
 ALTER TABLE `produtor`
-  MODIFY `produtorid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `produtorid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `regiao`
