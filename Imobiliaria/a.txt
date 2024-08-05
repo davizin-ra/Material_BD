@@ -1,0 +1,68 @@
+-- Geração de Modelo físico
+-- Sql ANSI 2003 - brModelo.
+
+
+
+CREATE TABLE imovel (
+rua varchar(255),
+bairro varchar(255),
+cidade varchar(255),
+estado varchar(255),
+id_imovel varchar(255) PRIMARY KEY,
+area int(11),
+qtdquartos int(11),
+qtdbanheiro int(11),
+historico varchar(255),
+garagem bit,
+id_proprietario int(11)
+)
+
+CREATE TABLE corretor (
+id_corretor int(11) PRIMARY KEY auto_increment,
+datanascimento date,
+nome varchar(255),
+rg int(11)
+)
+
+CREATE TABLE inquilino (
+datanascimento date,
+nome varchar(255),
+rg varchar(255),
+id_inquilino int(11) PRIMARY KEY,
+id_fiador Texto(1)
+)
+
+CREATE TABLE fiador (
+id_fiador Texto(1) PRIMARY KEY,
+datanascimento Texto(1),
+rg Texto(1),
+nome Texto(1)
+)
+
+CREATE TABLE proprietario (
+id_proprietario int(11) PRIMARY KEY,
+telefone varchar(255),
+datanascimento date,
+rg varchar(255),
+nome varchar(255)
+)
+
+CREATE TABLE aluguel (
+preco decimal(6,2),
+data date,
+id_aluguel int(11) PRIMARY KEY,
+id_corretor int(11),
+id_imovel varchar(255),
+FOREIGN KEY(id_corretor) REFERENCES corretor (id_corretor),
+FOREIGN KEY(id_imovel) REFERENCES imovel (id_imovel)
+)
+
+CREATE TABLE pertence (
+id_inquilino int(11),
+id_aluguel int(11),
+FOREIGN KEY(id_inquilino) REFERENCES inquilino (id_inquilino),
+FOREIGN KEY(id_aluguel) REFERENCES aluguel (id_aluguel)
+)
+
+ALTER TABLE imovel ADD FOREIGN KEY(id_proprietario) REFERENCES proprietario (id_proprietario)
+ALTER TABLE inquilino ADD FOREIGN KEY(id_fiador) REFERENCES fiador (id_fiador)
