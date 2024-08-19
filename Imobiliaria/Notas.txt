@@ -4,86 +4,83 @@
 
 
 CREATE TABLE proprietario (
-id_proprietario int(11) PRIMARY KEY, auto_increment,
-email varchar(255), not null,
-telefone varchar(255), not null,
-datanascimento date, not null,
-cpf varchar(255), not null, unique,
-nome varchar(255), not null,
-banco varchar (255),
-agencia varchar (255),
-pix varchar (255), unique,
-qtd_imovel int(11), not null,
-)
+    id_proprietario int(11) PRIMARY KEY auto_increment,
+    email varchar(255) not null,
+    telefone varchar(255) not null,
+    datanascimento date not null,
+    cpf varchar(255) not null unique,
+    nome varchar(255) not null,
+    banco varchar(255),
+    agencia varchar(255),
+    pix varchar(255) unique,
+    qtd_imovel int(11) not null
+);
 
 CREATE TABLE fiador (
-nome varchar(255), not null,
-id_fiador int(11) PRIMARY KEY, auto_increment,
-datanascimento date, not null,
-email varchar (255), not null, unique,
-cpf varchar(255), not null, unique,
-)
+    nome varchar(255) not null,
+    id_fiador int(11) PRIMARY KEY auto_increment,
+    datanascimento date not null,
+    email varchar(255) not null unique,
+    cpf varchar(255) not null unique
+);
 
 CREATE TABLE imovel (
-rua varchar(255), not null,
-bairro varchar(255), not null,
-cidade varchar(255), not null,
-estado varchar(255), not null,
-id_imovel varchar(255) PRIMARY KEY, auto_increment,
-area int(11), not null,
-qtdquartos int(11), not null,
-qtdbanheiro int(11), not null,
-historico varchar(255),
-garagem bit, not null,
-piscina bit, not null,
-lavanderia bit, not null,
-
-)
+    rua varchar(255) not null,
+    bairro varchar(255) not null,
+    cidade varchar(255) not null,
+    estado varchar(255) not null,
+    id_imovel int(11) PRIMARY KEY auto_increment,
+    area int(11) not null,
+    qtdquartos int(11) not null,
+    qtdbanheiro int(11) not null,
+    historico varchar(255),
+    garagem bit not null,
+    piscina bit not null,
+    lavanderia bit not null
+);
 
 CREATE TABLE inquilino (
-datanascimento date, not null,
-nome varchar(255), not null,
-email varchar(255), not null, unique,
-cpf varchar(255), not null, unique,
-id_inquilino int(11) PRIMARY KEY, auto_increment,
-id_fiador int(11)
-FOREIGN KEY(id_fiador) REFERENCES fiador (id_fiador)
-)
+    datanascimento date not null,
+    nome varchar(255) not null,
+    email varchar(255) not null unique,
+    cpf varchar(255) not null unique,
+    id_inquilino int(11) PRIMARY KEY auto_increment,
+    id_fiador int(11),
+    FOREIGN KEY(id_fiador) REFERENCES fiador(id_fiador)
+);
 
 CREATE TABLE corretor (
-id_corretor int(11) PRIMARY KEY,
-datanascimento date, not null,
-nome varchar(255), not null,
-cpf varchar(255), not null, unique,
-email varchar (255), not null, unique,
-)
-
+    id_corretor int(11) PRIMARY KEY,
+    datanascimento date not null,
+    nome varchar(255) not null,
+    cpf varchar(255) not null unique,
+    email varchar(255) not null unique
+);
 
 CREATE TABLE aluguel (
-preco decimal(6,2), not null,
-data date, not null,
-id_aluguel int(11) PRIMARY KEY, auto_increment,
-id_corretor int(11),
-id_imovel varchar(255),
-id_inquilino int(11),
-FOREIGN KEY(id_imovel) REFERENCES imovel (id_imovel)
-)
+    preco decimal(6,2) not null,
+    data date not null,
+    id_aluguel int(11) PRIMARY KEY auto_increment,
+    id_corretor int(11),
+    id_imovel int(11),
+    id_inquilino int(11),
+    FOREIGN KEY(id_imovel) REFERENCES imovel(id_imovel)
+);
 
 CREATE TABLE fotos (
-id_foto int(11) PRIMARY KEY, auto_increment,
-midia varchar(255), not null,
-id_imovel varchar(255),
-FOREIGN KEY(id_imovel) REFERENCES imovel (id_imovel)
-)
+    id_foto int(11) PRIMARY KEY auto_increment,
+    midia varchar(255) not null,
+    id_imovel int(11),
+    FOREIGN KEY(id_imovel) REFERENCES imovel(id_imovel)
+);
 
 CREATE TABLE possui (
-id_proprietario int(11),
-id_imovel int(11),
-FOREIGN KEY(id_imovel) REFERENCES imovel (id_imovel)
-)
+    id_proprietario int(11),
+    id_imovel int(11),
+    FOREIGN KEY(id_imovel) REFERENCES imovel(id_imovel)
+);
 
-
-ALTER TABLE aluguel ADD FOREIGN KEY(id_corretor) REFERENCES corretor (id_corretor)
-ALTER TABLE aluguel ADD FOREIGN KEY(id_inquilino) REFERENCES inquilino (id_inquilino)
-ALTER TABLE inquilino ADD FOREIGN KEY(id_fiador) REFERENCES fiador (id_fiador)
-ALTER TABLE possui ADD FOREIGN KEY(id_proprietario) REFERENCES proprietario (id_proprietario)
+ALTER TABLE aluguel ADD FOREIGN KEY(id_corretor) REFERENCES corretor(id_corretor);
+ALTER TABLE aluguel ADD FOREIGN KEY(id_inquilino) REFERENCES inquilino(id_inquilino);
+ALTER TABLE inquilino ADD FOREIGN KEY(id_fiador) REFERENCES fiador(id_fiador);
+ALTER TABLE possui ADD FOREIGN KEY(id_proprietario) REFERENCES proprietario(id_proprietario);
